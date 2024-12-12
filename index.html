@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dinosaur Facts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .fact-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .fact-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .fact-number {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        #random-fact-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #random-fact-btn:hover {
+            background-color: #34495e;
+        }
+    </style>
+</head>
+<body>
+    <h1>🦖 Fascinating Dinosaur Facts 🦕</h1>
+    <button id="random-fact-btn">Show Random Fact</button>
+    <div id="facts-container"></div>
+
+    <script>
+        const dinosaurData = {
+            "dinosaurFacts": [
+                // Your JSON data goes here
+                // I'm referencing the previously generated JSON
+            ]
+        };
+
+        function displayFacts() {
+            const container = document.getElementById('facts-container');
+            container.innerHTML = '';
+            
+            dinosaurData.dinosaurFacts.forEach(fact => {
+                const factCard = document.createElement('div');
+                factCard.className = 'fact-card';
+                factCard.innerHTML = `
+                    <span class="fact-number">Fact #${fact.id}:</span>
+                    <span>${fact.fact}</span>
+                `;
+                container.appendChild(factCard);
+            });
+        }
+
+        function showRandomFact() {
+            const container = document.getElementById('facts-container');
+            const randomIndex = Math.floor(Math.random() * dinosaurData.dinosaurFacts.length);
+            const randomFact = dinosaurData.dinosaurFacts[randomIndex];
+            
+            container.innerHTML = '';
+            const factCard = document.createElement('div');
+            factCard.className = 'fact-card';
+            factCard.innerHTML = `
+                <span class="fact-number">Fact #${randomFact.id}:</span>
+                <span>${randomFact.fact}</span>
+            `;
+            container.appendChild(factCard);
+        }
+
+        // Initial display of all facts
+        displayFacts();
+
+        // Add event listener for random fact button
+        document.getElementById('random-fact-btn').addEventListener('click', showRandomFact);
+    </script>
+</body>
+</html>
